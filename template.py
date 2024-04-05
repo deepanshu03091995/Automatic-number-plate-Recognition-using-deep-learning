@@ -21,7 +21,7 @@ list_of_files=[
     'notebooks/data_collection.ipynb',
     "notebooks/ocr.ipynb",
     'requirements.txt',
-    "app.py"
+    "app.py",
     "setup.py",
     
 ]
