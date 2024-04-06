@@ -113,4 +113,4 @@ class S3Operation:
             return model
             
         except Exception as e:
-            raise ANPRException(e, sys) from e 
+            raise ANPRException(e, sys)

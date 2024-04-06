@@ -34,7 +34,7 @@ class DataIngestion:
         Method Name :   _get_updated_list_of_files
         Description :   This hidden method will check if file is of extension jpeg or xml.
         """
-        return [f for f in list_of_files if f.endswith(".jpeg") or (f.endswith(".xml")) ]
+        return [f for f in list_of_files if f.endswith(".png") or (f.endswith(".xml")) ]
 
     def _preprocess(self, zf:ZipFile, f:str, working_dir):
         """
