@@ -18,3 +18,18 @@ DATA_TRANSFORMATION_ARTIFACTS_DIR = "DataTransformation"
 LABELED_DATAFRAME = "labels.csv"
 TRANSFORMED_DATA='data.npy'
 TRANSFORMED_OUTPUT='output.npy'
+
+
+
+# Prepare Base Model related constants
+PREPARE_BASE_MODEL_DIR = "PrepareBaseModel"
+BASE_MODEL_PATH = 'base_model.h5'
+UPDATED_MODEL_PATH = 'updated_model.h5'
+AUGMENTAION = True
+IMAGE_SIZE = [224,224,3] # As per InceptionResNetV2
+BATCH_SIZE = 8
+INCLUDE_TOP = False
+EPOCHS= 100
+WEIGHTS = 'imagenet'
+LEARNING_RATE = 1e-4
+CLASSES = 4
