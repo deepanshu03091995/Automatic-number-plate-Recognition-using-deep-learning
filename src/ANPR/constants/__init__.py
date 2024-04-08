@@ -29,7 +29,18 @@ AUGMENTAION = True
 IMAGE_SIZE = [224,224,3] # As per InceptionResNetV2
 BATCH_SIZE = 8
 INCLUDE_TOP = False
-EPOCHS= 100
+EPOCHS= 50
 WEIGHTS = 'imagenet'
 LEARNING_RATE = 1e-4
 CLASSES = 4
+
+
+# Prepare Callbacks related constants
+PREPARE_CALLBACKS_DIR ="Callbacks"
+TENSORBOARD_ROOT_LOG_DIR = "tensorboard_root_log_dir"
+CHECKPOINT_DIR = "checkpoint_dir"
+CHECKPOINT_MODEL = "model.h5"
+
+# Model Training related constants
+MODEL_TRAINING_DIR = "Training"
+TRAINED_MODEL = "model.h5" 

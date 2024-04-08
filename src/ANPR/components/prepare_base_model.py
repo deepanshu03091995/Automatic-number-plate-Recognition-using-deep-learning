@@ -56,7 +56,7 @@ class PrepareBaseModel:
 
             prepare_base_model_artifact = PrepareBaseModelArtifacts(
                 base_model_file_path=self.prepare_base_model_config.BASEMODEL_PATH,
-                updated_model_filr_path= self.prepare_base_model_config.UPDATED_MODEL_PATH
+                updated_model_file_path= self.prepare_base_model_config.UPDATED_MODEL_PATH
             )
 
             logging.info("Exited the initiate_prepare_basemodel method of PrepareBaseModel class")

@@ -8,6 +8,7 @@ from src.ANPR.constants import *
 from src.ANPR.components.data_ingestion import DataIngestion
 from src.ANPR.components.data_transformation import DataTransformation
 from src.ANPR.components.prepare_base_model import PrepareBaseModel
+from src.ANPR.components.model_trainer import ModelTraining
 
 
 class TrainPipeline:
@@ -15,6 +16,8 @@ class TrainPipeline:
         self.data_ingestion_config = DataIngestionConfig()
         self.data_transformation_config = DataTransformationConfig()
         self.prepare_base_model_config = PrepareBaseModelConfig()
+        self.training_config = TrainingConfig()
+        self.prepare_callbacks_config = PrepareCallbacksConfig()
         self.s3_operations = S3Operation()
     
     
@@ -52,11 +55,43 @@ class TrainPipeline:
 
         except Exception as e:
             raise ANPRException(e, sys)    
+     
+     
+    def model_training(self,data_ingestion_artifact:DataIngestionArtifacts,
+            data_transformation_artifact :DataTransformationArtifacts,
+            prepare_base_model_artifact : PrepareBaseModelArtifacts
+            ):
+        try:
+            logging.info("Entered the prepare_callbacks method of TrainPipeline class")
+            training_obj = ModelTraining(
+                training_config= self.training_config,
+                prepare_callbacks_config= self.prepare_callbacks_config,
+                data_ingestion_artifact= data_ingestion_artifact,
+                data_transformation_artifact= data_transformation_artifact,
+                prepare_base_model_artifact= prepare_base_model_artifact
+            )
+            model_trainer_artifact = training_obj.initiate_model_training()
+            return model_trainer_artifact
+            
+        except Exception as e:
+            raise ANPRException(e, sys)
+     
+     
+     
+     
+     
+     
         
     def run_pipeline(self)->None:
         try:
             data_ingestion_artifact = self.start_data_ingestion()
             data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact)
             prepare_base_model_artifact = self.prepare_base_model()
+            
+            model_trainer_artifact = self.model_training(
+                data_ingestion_artifact=data_ingestion_artifact,
+                data_transformation_artifact = data_transformation_artifact,
+                prepare_base_model_artifact=prepare_base_model_artifact)
+            
         except Exception as e:
             raise ANPRException(e, sys)        
