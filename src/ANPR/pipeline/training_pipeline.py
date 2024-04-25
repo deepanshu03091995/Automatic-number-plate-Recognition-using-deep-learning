@@ -9,6 +9,7 @@ from src.ANPR.components.data_ingestion import DataIngestion
 from src.ANPR.components.data_transformation import DataTransformation
 from src.ANPR.components.prepare_base_model import PrepareBaseModel
 from src.ANPR.components.model_trainer import ModelTraining
+from src.ANPR.components.model_pusher import ModelPusher
 
 
 class TrainPipeline:
@@ -18,6 +19,7 @@ class TrainPipeline:
         self.prepare_base_model_config = PrepareBaseModelConfig()
         self.training_config = TrainingConfig()
         self.prepare_callbacks_config = PrepareCallbacksConfig()
+        self.model_pusher_config = ModelPusherConfig()
         self.s3_operations = S3Operation()
     
     
@@ -76,7 +78,16 @@ class TrainPipeline:
         except Exception as e:
             raise ANPRException(e, sys)
      
-     
+    def start_model_pusher(self,model_trainer_artifacts: ModelTrainerArtifacts, s3_operations: S3Operation):
+        logging.info("Entered the start_model_pusher method of TrainPipeline class")
+        try:
+            model_pusher_obj = ModelPusher(model_pusher_config=self.model_pusher_config,
+            model_trainer_artifacts= model_trainer_artifacts,
+            s3_operations=s3_operations)
+
+            model_pusher_obj.initiate_model_pusher()
+        except Exception as e:
+            raise ANPRException(e, sys) 
      
      
      
@@ -92,6 +103,7 @@ class TrainPipeline:
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_transformation_artifact = data_transformation_artifact,
                 prepare_base_model_artifact=prepare_base_model_artifact)
+            self.start_model_pusher(model_trainer_artifacts = model_trainer_artifact,s3_operations=self.s3_operations)    
             
         except Exception as e:
             raise ANPRException(e, sys)        

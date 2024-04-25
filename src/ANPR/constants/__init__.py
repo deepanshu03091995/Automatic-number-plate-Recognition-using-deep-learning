@@ -44,3 +44,12 @@ CHECKPOINT_MODEL = "model.h5"
 # Model Training related constants
 MODEL_TRAINING_DIR = "Training"
 TRAINED_MODEL = "model.h5" 
+
+
+
+#Prediction Pipeline related constants
+STATIC_DIR ="static"
+PREDICT_SUB_DIR = 'predict'
+ROI_SUB_DIR = 'roi'
+UPLOAD_SUB_DIR = 'upload'
+OCR_SUB_DIR = 'ocr_result'
