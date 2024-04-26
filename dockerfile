@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.9
 
 RUN pip install --upgrade pip
 
@@ -13,3 +13,4 @@ RUN pip install -r requirements.txt
 RUN apt install ffmpeg libsm6 libxext6  -y
 
 CMD ["python3", "app.py"]
+
