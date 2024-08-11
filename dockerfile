@@ -1,11 +1,8 @@
-FROM python:3.9-slim-buster
+FROM python:3.9
 
 RUN pip install --upgrade pip
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update 
 
 WORKDIR /app
 
@@ -13,6 +10,6 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-
+RUN apt-get install ffmpeg libsm6 libxext6  -y
 
 CMD ["python3", "app.py"]
